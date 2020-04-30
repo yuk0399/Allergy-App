@@ -1,49 +1,83 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-    <head>
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
+
+<head>
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+    <title>Allergy App</title>
+</head>
+
+<body>
+    <div id="logreg-forms">
+        <div class="app"></div>
+        <form class="form-signin">
+            <h1>Ara Allergy App</h1>
+            <h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign in</h1>
+            <div class="social-login">
+                <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign
+                        in with Facebook</span> </button>
+                <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign
+                        in with Google+</span> </button>
             </div>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-    </body>
+            <p style="text-align:center"> OR </p>
+            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required=""
+                autofocus="">
+            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
+
+            <button class="btn btn-success btn-block" type="submit" onclick="nextPage();"><i class="fas fa-sign-in-alt"></i> Sign in</button>
+            <a href="#" id="forgot_pswd" onclick="toggleResetPswd();">Forgot password?</a>
+            <hr>
+            <!-- <p>Don't have an account!</p>  -->
+            <button class="btn btn-primary btn-block" type="button" id="btn-signup" onclick="toggleSignUp();"><i
+                    class="fas fa-user-plus"></i>
+                Sign up New Account</button>
+        </form>
+
+        <form action="/reset/password/" class="form-reset">
+            <input type="email" id="resetEmail" class="form-control" placeholder="Email address" required=""
+                autofocus="">
+            <button class="btn btn-primary btn-block" type="submit">Reset Password</button>
+            <a href="#" id="cancel_reset" onclick="toggleResetPswd();"><i class="fas fa-angle-left"></i> Back</a>
+        </form>
+
+        <form action="/signup/" class="form-signup">
+            <div class="social-login">
+                <button class="btn facebook-btn social-btn" type="button"><span><i class="fab fa-facebook-f"></i> Sign
+                        up with Facebook</span> </button>
+            </div>
+            <div class="social-login">
+                <button class="btn google-btn social-btn" type="button"><span><i class="fab fa-google-plus-g"></i> Sign
+                        up with Google+</span> </button>
+            </div>
+
+            <p style="text-align:center">OR</p>
+
+            <input type="text" id="user-name" class="form-control" placeholder="Full name" required="" autofocus="">
+            <input type="email" id="user-email" class="form-control" placeholder="Email address" required autofocus="">
+            <input type="password" id="user-pass" class="form-control" placeholder="Password" required autofocus="">
+            <input type="password" id="user-repeatpass" class="form-control" placeholder="Repeat Password" required
+                autofocus="">
+
+            <button class="btn btn-primary btn-block" type="submit"><i class="fas fa-user-plus"></i> Sign Up</button>
+            <a href="#" id="cancel_signup" onclick="toggleSignUp();"><i class="fas fa-angle-left"></i> Back</a>
+        </form>
+        <br>
+
+    </div>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+</body>
+
 </html>

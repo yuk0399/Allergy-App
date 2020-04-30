@@ -18,7 +18,7 @@
  */
 var app = {
     // Application Constructor
-    initialize: function() {
+    initialize: function () {
         document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
     },
 
@@ -26,12 +26,12 @@ var app = {
     //
     // Bind any cordova events here. Common events are:
     // 'pause', 'resume', etc.
-    onDeviceReady: function() {
+    onDeviceReady: function () {
         this.receivedEvent('deviceready');
     },
 
     // Update DOM on a Received Event
-    receivedEvent: function(id) {
+    receivedEvent: function (id) {
         var parentElement = document.getElementById(id);
         var listeningElement = parentElement.querySelector('.listening');
         var receivedElement = parentElement.querySelector('.received');
@@ -44,3 +44,25 @@ var app = {
 };
 
 app.initialize();
+
+function toggleResetPswd(e) {
+    $('#logreg-forms .form-signin').toggle() // display:block or none
+    $('#logreg-forms .form-reset').toggle() // display:block or none
+}
+
+function toggleSignUp(e) {
+    $('#logreg-forms .form-signin').toggle(); // display:block or none
+    $('#logreg-forms .form-signup').toggle(); // display:block or none
+}
+
+function nextPage() {
+    window.location.assign('resturants.html');
+}
+
+function nextPageTable() {
+    window.location.assign('table.html');
+}
+
+function nextPageHome() {
+    window.location.assign('index.html');
+}
