@@ -1,10 +1,10 @@
 {
   "background_color": "#FFF",
   "display": "standalone",
-  "name": "HelloWorld",
-  "short_name": "HelloWorld",
-  "version": "com.example.hello",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
+  "name": "DefaultTemplate",
+  "short_name": "DefaultTemplate",
+  "version": "com.template",
+  "description": "Brand new cordova project!",
   "author": "Apache Cordova Team",
   "icons": [],
   "start_url": "index.html"

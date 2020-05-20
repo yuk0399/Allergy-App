@@ -1,6 +1,6 @@
 {
-  "name": "HelloWorld",
-  "short_name": "HelloWorld",
+  "name": "DefaultTemplate",
+  "short_name": "DefaultTemplate",
   "description": "Description of your app from template",
   "start_url": "index.html",
   "scope": "index.html",
