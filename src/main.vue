@@ -1,38 +1,30 @@
 <template>
-    <!-- App -->
-    <f7-app :params="f7params">
-        <f7-statusbar></f7-statusbar>
-        <f7-panel left cover>
-            <f7-view url="/panel-left/" links-view=".view-main" />
-        </f7-panel>
-        <f7-view url="/" :main="true" class="ios-edges"></f7-view>
-    </f7-app>
+  <f7-app :params="f7params" class="color-theme-pink">
+    <f7-view url="/" :main="true">
+      <f7-navbar>
+        <div class="title">DineWell</div>
+      </f7-navbar>
+    </f7-view>
+  </f7-app>
 </template>
 <script>
-// Import Routes...
-import { f7App, f7Panel, f7View, f7Statusbar } from 'framework7-vue';
-import routes from './routes.js';
-
-let theme = 'auto';
-if (document.location.search.indexOf('theme=') >= 0) {
-  theme = document.location.search.split('theme=')[1].split('&')[0];
-}
+import { f7App, f7View } from "framework7-vue";
+import routes from "./routes.js";
 
 export default {
-    components: {
-      f7App,
-      f7Panel,
-      f7View,
-      f7Statusbar,
-    },
-    data() {
-        return {
-            f7params: {
-                theme,
-                routes,
-                id: 'io.framework7.testapp',
-            }
-        }
-    }
-}
+  components: {
+    f7App,
+    f7View
+  },
+  data() {
+    return {
+      f7params: {
+        theme: "md",
+        routes,
+        id: "io.jok0436.DineWell",
+        autoDarkTheme: true
+      }
+    };
+  }
+};
 </script>
