@@ -1,8 +1,11 @@
 <template>
   <f7-login-screen class="home-login-screen">
+    <legal />
+    <forgot />
+    <create />
     <f7-page login-screen>
-      <img src="static/logo.jpg" width="189" height="144" alt />
-      <f7-login-screen-title>DineWell Login</f7-login-screen-title>
+      <img src="static/logo.jpg" id="logo" />
+      <f7-login-screen-title>DineWell</f7-login-screen-title>
       <f7-list form>
         <f7-list-input
           label="Email \ Username"
@@ -26,8 +29,9 @@
         </f7-block-footer>
         <f7-button fill @click="signUp" title="Create Account">Create Account</f7-button>
         <f7-block-footer>
-          Forgotten your Password?
-          <br />By entering this site, you agree to our Terms and Conditions.
+          <a @click="forgotPassword">Forgotten your Password?</a>
+          <br />By entering this site, you agree to our
+          <a @click="showTerms">Terms and Conditions.</a>
         </f7-block-footer>
       </f7-list>
     </f7-page>
@@ -35,24 +39,41 @@
 </template>
 
 <script>
+import legal from "./legal";
+import forgot from "./forgot";
+import create from "./create";
+
 export default {
+  components: {
+    legal,
+    forgot,
+    create
+  },
   data() {
     return {
       username: "",
-      password: ""
+      password: "",
+      openLegal: false
     };
   },
   methods: {
     signIn() {
-      const self = this;
-      const app = self.$f7;
-      const router = self.$f7router;
-      app.dialog.alert(
+      this.$f7.dialog.alert(
         `Username: ${self.username}<br>Password: ${self.password}`,
         () => {
-          router.back();
+          this.$f7router.back();
+          this.$f7.loginScreen.close(".home-login-screen");
         }
       );
+    },
+    signUp() {
+      this.$f7.popup.open(".create-popup");
+    },
+    forgotPassword() {
+      this.$f7.popup.open(".forgot-popup");
+    },
+    showTerms() {
+      this.$f7.popup.open(".terms-popup");
     }
   }
 };
@@ -62,5 +83,12 @@ export default {
 #loginOr {
   margin-bottom: 5px;
   margin-top: 5px;
+}
+
+#logo {
+  display: block;
+  border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

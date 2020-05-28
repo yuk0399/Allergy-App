@@ -31,6 +31,17 @@ import app from './main.vue';
 // Import Vuex Storage
 import store from './assets/vuex/storage.js';
 
+import VueMq from 'vue-mq'
+
+Vue.use(VueMq, {
+  breakpoints: {
+    mobile: 450,
+    tablet: 900,
+    laptop: 1250,
+    desktop: Infinity,
+  }
+})
+
 // Different F7-Vue plugin initialization with f7 v3.0
 Framework7.use(Framework7Vue);
 
