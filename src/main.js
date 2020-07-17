@@ -33,6 +33,21 @@ import store from './assets/vuex/storage.js';
 
 import VueMq from 'vue-mq'
 
+import * as firebase from "firebase";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBmR9SOEr0oBPpX5udwO-OlNxmhOZpYNRw",
+  authDomain: "dine-well.firebaseapp.com",
+  databaseURL: "https://dine-well.firebaseio.com",
+  projectId: "dine-well",
+  storageBucket: "dine-well.appspot.com",
+  messagingSenderId: "41994348066",
+  appId: "1:41994348066:web:1c34fb38763a3d158dcc7b",
+  measurementId: "G-YDFRX03MHE"
+};
+
+firebase.initializeApp(firebaseConfig);
+
 Vue.use(VueMq, {
   breakpoints: {
     mobile: 450,

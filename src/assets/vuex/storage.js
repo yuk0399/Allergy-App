@@ -1,29 +1,27 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import AuthModule from "./auth";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  modules: {
+    auth: AuthModule
+  },
   state: {
-    user: {
-      isLoggedIn: false
-    }
+    alert_message:null,
+    show_tabbar:true
   },
-
-  actions: {
-    userLogged({ commit }, user) {
-      commit('USER_LOGGED', user);
-    }
+  getters:{
+    alert_message:state=>state.alert_message,
+    show_tabbar:state=>state.show_tabbar
   },
-
   mutations: {
-    USER_LOGGED(state, user) {
-      state.user = user;
-    }
-  },
-  getters: {
-    userLoggedIn: state => {
-      return state.user.isLoggedIn
+    setAlertMessage(state,payload){
+      state.alert_message = payload
+    },
+    setShowTabs(state,payload){
+      state.show_tabbar = payload
     }
   }
 });
