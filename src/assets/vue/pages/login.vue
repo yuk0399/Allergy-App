@@ -42,6 +42,7 @@
 import legal from "./legal";
 import forgot from "./forgot";
 import create from "./create";
+import { mixin } from '../../js/mixin';
 
 export default {
   components: {
@@ -56,15 +57,26 @@ export default {
       openLegal: false
     };
   },
+  mixins: [mixin],
   methods: {
     signIn() {
-      this.$f7.dialog.alert(
-        `Username: ${self.username}<br>Password: ${self.password}`,
-        () => {
-          this.$f7router.back();
-          this.$f7.loginScreen.close(".home-login-screen");
-        }
-      );
+      console.log('signin')
+      // this.showToastBottom('show toast')
+      var payload = {}
+      payload.email = this.username
+      payload.password = this.password
+      this.$store.dispatch('signIn', payload)
+      if (this.$store.getters.signed_in) {
+        this.$f7router.back();
+        this.$f7.loginScreen.close(".home-login-screen");
+      }
+      // this.$f7.dialog.alert(
+      //   `Username: ${self.username}<br>Password: ${self.password}`,
+      //   () => {
+      //     this.$f7router.back();
+      //     this.$f7.loginScreen.close(".home-login-screen");
+      //   }
+      // );
     },
     signUp() {
       this.$f7.popup.open(".create-popup");

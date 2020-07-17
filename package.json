@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "Brand new cordova project with framework7 - vue - webpack!",
   "scripts": {
-    "default": "echo \"There is no scripts you can run with npm run command.\" && exit 1"
+    "start": "cordova run browser -- --live-reload"
   },
   "keywords": [
     "ecosystem:cordova"
@@ -48,6 +48,7 @@
     "cordova-android": "^8.1.0",
     "cordova-browser": "^6.0.0",
     "fastclick": "^1.0.6",
+    "firebase": "^7.16.0",
     "framework7": "^5.3.0",
     "framework7-icons": "^3.0.0",
     "framework7-vue": "^5.3.0",

@@ -29,7 +29,7 @@
           @input="password = $event.target.value"
         ></f7-list-input>
         <br />
-        <f7-button round fill @click="create" title="Create Account">Create Account</f7-button>
+        <f7-button round fill @click="signUp" title="Create Account">Create Account</f7-button>
         <f7-block v-if="showMessage" :text-color="messageTextColor">{{message}}</f7-block>
       </f7-list>
     </f7-page>
@@ -37,6 +37,8 @@
 </template>
     
 <script>
+import { mixin } from '../../js/mixin';
+
 export default {
   data() {
     return {
@@ -48,11 +50,23 @@ export default {
       message: "n/a"
     };
   },
+  mixins: [mixin],
+  mounted() {
+    this.$store.watch(
+      (state, getters) => getters.signed_up,
+      (newValue, oldValue) => {
+         if (newValue == true) {
+           this.$f7.popup.close(".create-popup");
+         }
+      }
+    )
+  },
   methods: {
-    create() {
-      this.showMessage = true;
-      this.messageTextColor = "red";
-      this.message = "Something went wrong!";
+    signUp() {
+      var payload = {}
+      payload.email = this.email
+      payload.password = this.password
+      this.$store.dispatch('signUp', payload)
     }
   }
 };
