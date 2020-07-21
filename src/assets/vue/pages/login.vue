@@ -8,7 +8,7 @@
       <f7-login-screen-title>DineWell</f7-login-screen-title>
       <f7-list form>
         <f7-list-input
-          label="Email \ Username"
+          label="Email"
           type="text"
           placeholder="Your email"
           :value="username"
@@ -58,25 +58,23 @@ export default {
     };
   },
   mixins: [mixin],
+  mounted() {
+    this.$store.watch(
+      (state, getters) => getters.signed_in,
+      (newValue, oldValue) => {
+         if (newValue == true) {
+          this.$f7.loginScreen.close(".home-login-screen");
+        }
+      }
+    )
+  },
   methods: {
     signIn() {
       console.log('signin')
-      // this.showToastBottom('show toast')
       var payload = {}
       payload.email = this.username
       payload.password = this.password
       this.$store.dispatch('signIn', payload)
-      if (this.$store.getters.signed_in) {
-        this.$f7router.back();
-        this.$f7.loginScreen.close(".home-login-screen");
-      }
-      // this.$f7.dialog.alert(
-      //   `Username: ${self.username}<br>Password: ${self.password}`,
-      //   () => {
-      //     this.$f7router.back();
-      //     this.$f7.loginScreen.close(".home-login-screen");
-      //   }
-      // );
     },
     signUp() {
       this.$f7.popup.open(".create-popup");
