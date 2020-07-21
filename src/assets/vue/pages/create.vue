@@ -15,6 +15,24 @@
       <f7-list form>
         <f7-block>Start looking for great resturants near you!</f7-block>
         <f7-list-input
+          label="Name"
+          type="text"
+          placeholder="Your display name"
+          :value="name"
+          @input="name = $event.target.value"
+        ></f7-list-input>
+        <f7-list-input
+          label="Location"
+          type="select"
+          :value="location"
+          @input="location = $event.target.value"
+          defaultValue="suburb"
+          placeholder="Please choose..."
+          >
+          <option value="city">Christchurch City</option>
+          <option value="suburb">Christchurch Suburb</option>
+        </f7-list-input>
+        <f7-list-input
           label="Email"
           type="text"
           placeholder="Your email"
@@ -30,7 +48,6 @@
         ></f7-list-input>
         <br />
         <f7-button round fill @click="signUp" title="Create Account">Create Account</f7-button>
-        <f7-block v-if="showMessage" :text-color="messageTextColor">{{message}}</f7-block>
       </f7-list>
     </f7-page>
   </f7-popup>
@@ -43,11 +60,10 @@ export default {
   data() {
     return {
       popupOpened: false,
+      name: "",
+      location: "",
       email: "",
-      password: "",
-      showMessage: false,
-      messageTextColor: "blue",
-      message: "n/a"
+      password: ""
     };
   },
   mixins: [mixin],
@@ -66,6 +82,8 @@ export default {
       var payload = {}
       payload.email = this.email
       payload.password = this.password
+      payload.name = this.name
+      payload.location = this.location
       this.$store.dispatch('signUp', payload)
     }
   }
